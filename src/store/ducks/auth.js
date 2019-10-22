@@ -29,6 +29,7 @@ export default function auth(state = INITIAL_STATE, action) {
   return produce(state, draft => {
     switch (action.type) {
       case Types.SIGN_IN_REQUEST: {
+        console.tron.log('teste');
         draft.loading = true;
         break;
       }
@@ -38,11 +39,18 @@ export default function auth(state = INITIAL_STATE, action) {
         draft.loading = false;
         break;
       }
+
+      case Types.SIGN_FAILURE: {
+        draft.loading = false;
+        break;
+      }
+
       case Types.SIGN_OUT: {
         draft.token = null;
         draft.signed = false;
         break;
       }
+
       default:
     }
   });

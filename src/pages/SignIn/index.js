@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Alert } from 'react-native';
 import Background from '~/components/Background';
+
+import { Creators } from '~/store/ducks/auth';
 
 import {
   Container,
@@ -13,11 +15,16 @@ import {
 } from './styles';
 
 export default function SignIn({ navigation }) {
+  const dispatch = useDispatch();
+  const { signInRequest } = Creators;
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const loading = useSelector(state => state.auth.loading);
+
   function handleSubmit() {
-    Alert.alert(email);
+    dispatch(signInRequest(email, password));
   }
 
   return (
@@ -42,7 +49,9 @@ export default function SignIn({ navigation }) {
             value={password}
             onChangeText={setPassword}
           />
-          <SubmitButton onPress={handleSubmit}>Acessar</SubmitButton>
+          <SubmitButton loading={loading} onPress={handleSubmit}>
+            Acessar
+          </SubmitButton>
         </Form>
         <SignLink
           onPress={() => {
