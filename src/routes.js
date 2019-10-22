@@ -1,5 +1,7 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
+import { createDrawerNavigator } from 'react-navigation-drawer';
+
 import SignIn from '~/pages/SignIn';
 import SignUp from '~/pages/SignUp';
 
@@ -13,7 +15,7 @@ export default (isSigned = false) =>
           SignIn,
           SignUp,
         }),
-        App: createSwitchNavigator({
+        App: createDrawerNavigator({
           Dashboard,
         }),
       },
